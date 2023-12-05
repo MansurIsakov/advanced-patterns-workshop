@@ -5,6 +5,12 @@ import { expect, it } from "vitest";
  * DispatchableEvent interface from WITHIN
  * this file?
  */
+declare global {
+  interface DispatchableEvent {
+    LOG_OUT: {};
+    UPDATE_USERNAME: { username: string };
+  }
+}
 
 const handler = (event: UnionOfDispatchableEvents) => {
   switch (event.type) {

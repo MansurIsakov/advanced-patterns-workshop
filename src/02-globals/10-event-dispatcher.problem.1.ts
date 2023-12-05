@@ -12,13 +12,6 @@ declare global {
       password: string;
     };
   }
-
-  /**
-   * This type converts the DispatchableEvent
-   * interface into a union:
-   *
-   * { type: 'LOG_IN'; username: string; password: string; }
-   */
   type UnionOfDispatchableEvents = {
     [K in keyof DispatchableEvent]: {
       type: K;
