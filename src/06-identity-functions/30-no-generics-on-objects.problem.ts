@@ -13,7 +13,17 @@
  * const config = makeConfigObj(config);
  */
 
-export const configObj = {
+interface IConfig<TRoute extends string> {
+  routes: TRoute[];
+  fetchers: {
+    [K in TRoute]: () => any;
+  };
+}
+
+const makeConfigObj = <TConfig extends string>(config: IConfig<TConfig>) =>
+  config;
+
+export const configObj = makeConfigObj({
   routes: ["/", "/about", "/contact"],
   fetchers: {
     // @ts-expect-error
@@ -21,4 +31,4 @@ export const configObj = {
       return {};
     },
   },
-};
+});

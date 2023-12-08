@@ -5,9 +5,16 @@ interface Fruit {
   price: number;
 }
 
-export const wrapFruit = (fruits: unknown[]) => {
-  const getFruit = (name: unknown) => {
-    return fruits.find((fruit) => fruit.name === name);
+export const wrapFruit = <
+  const TFruits extends ReadonlyArray<{ name: string; price: number }>
+>(
+  fruits: TFruits
+) => {
+  const getFruit = <TName extends TFruits[number]["name"]>(name: TName) => {
+    return fruits.find((fruit) => fruit.name === name) as Extract<
+      TFruits[number],
+      { name: TName }
+    >;
   };
 
   return {
